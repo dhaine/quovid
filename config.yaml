@@ -1,0 +1,18 @@
+baseURL: https://example.com
+disableKinds:
+  - section
+  - taxonomy
+  - term
+  - RSS
+  - robotsTXT
+defaultContentLanguage: en
+theme: hugo-scroll
+title: QUOVID-19
+params:
+  copyright: © Denis Haine
+  description:
+  favicon: images/favicon.png
+  images: images/cover-image.jpg
+  meta:
+    keywords: COVID-19, COVID, Quebec, Québec, Canada, coronavirus
+  title: QUOVID-19
