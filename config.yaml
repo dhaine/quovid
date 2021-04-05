@@ -1,4 +1,4 @@
-baseURL: https://example.com
+baseURL: https://quovid19.netlify.app
 disableKinds:
   - section
   - taxonomy
