@@ -5,5 +5,3 @@ header_menu: true
 ---
 
 ![](homepage/incidence.png)
-
-{{< figure src="homepage/incidence_trial.gif" >}}
