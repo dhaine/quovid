@@ -12,4 +12,4 @@ header_menu: true
 
 ![](homepage/case_death.png)
 
-![](homepage/cases_heat.png)
+{{< figure src="homepage/cases_heat.png" class="zoomA" >}}
