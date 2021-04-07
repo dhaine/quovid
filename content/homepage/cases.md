@@ -11,3 +11,5 @@ header_menu: true
 ![](homepage/cases7_line.png)
 
 ![](homepage/case_death.png)
+
+![](homepage/cases_heat.png)

@@ -14,4 +14,6 @@ source("R/load.R")
 
 source("R/cases.R")
 
+source("R/heat.R")
+
 source("R/hospi.R")

@@ -390,3 +390,58 @@ hospi_al$si_ornot <- factor(hospi_al$si_ornot,
 #                                  Territoire == "Gaspésie - Îles-de-la-Madeleine" ~ "Gaspésie-Îles-de-la-Madeleine", TRUE ~ Territoire))
 #saveRDS(pop, "R/data/pop.rds")
 pop <- readRDS("R/data/pop.rds")
+
+#pop_age <- read.xlsx("R/data/EstimationProjectionComparable_1996_2041_20200424.xlsx",
+#                     sheet = 3, startRow = 5)
+#pop_age <- pop_age  %>%
+#    filter(Année == 2020 & Niveau.géographique == "Québec" & Sexe == "Total") %>%
+#    mutate(neuf = rowSums(test[, c(9:18)], na.rm = TRUE),
+#           dixneuf = rowSums(test[, c(19:28)], na.rm = TRUE),
+#           vingtneuf = rowSums(test[, c(29:38)], na.rm = TRUE),
+#           trenteneuf = rowSums(test[, c(39:48)], na.rm = TRUE),
+#           quaranteneuf = rowSums(test[, c(49:58)], na.rm = TRUE),
+#           cinquanteneuf = rowSums(test[, c(59:68)], na.rm = TRUE),
+#           soixanteneuf = rowSums(test[, c(69:78)], na.rm = TRUE),
+#           septanteneuf = rowSums(test[, c(79:88)], na.rm = TRUE),
+#           quatrevingtneuf = rowSums(test[, c(89:98)], na.rm = TRUE)) %>%
+#    rename(nonante = "90.ans.ou.plus") %>%
+#    select("Tous.les.âges", nonante:quatrevingtneuf)
+#saveRDS(pop_age, "R/data/pop_age.rds")
+pop_age <- readRDS("R/data/pop_age.rds")
+pop_agel <- pivot_longer(pop_age, "Tous.les.âges":quatrevingtneuf,
+                         names_to = "age", values_to = "pop") %>%
+    mutate(age = case_when(age == "neuf" ~ "0-9",
+                           age == "dixneuf" ~ "10-19",
+                           age == "vingtneuf" ~ "20-29",
+                           age == "trenteneuf" ~ "30-39",
+                           age == "quaranteneuf" ~ "40-49",
+                           age == "cinquanteneuf" ~ "50-59",
+                           age == "soixanteneuf" ~ "60-69",
+                           age == "septanteneuf" ~ "70-79",
+                           age == "quatrevingtneuf" ~ "80-89",
+                           age == "nonante" ~ "90+",
+                           age == "Tous.les.âges" ~ "Tous âges"))
+
+##---------------------------------------------------------------------------
+## age and cases
+## https://www.inspq.qc.ca/covid-19/donnees
+age <- read.csv("R/data/Graphique 1.6 - page age-sexe.csv")
+colnames(age) <- c("date", "case_9", "case_19", "case_29", "case_39",
+                   "case_49", "case_59", "case_69", "case_79", "case_89",
+                   "case_90")
+age <- age %>%
+    mutate(date = lubridate::date(date),
+           total = rowSums(age[, c(2:10)], na.rm = TRUE))
+age_l <- age %>%
+    pivot_longer(!date, names_to = "age", values_to = "nbr") %>%
+    mutate(age = case_when(age == "case_9" ~ "0-9",
+                           age == "case_19" ~ "10-19",
+                           age == "case_29" ~ "20-29",
+                           age == "case_39" ~ "30-39",
+                           age == "case_49" ~ "40-49",
+                           age == "case_59" ~ "50-59",
+                           age == "case_69" ~ "60-69",
+                           age == "case_79" ~ "70-79",
+                           age == "case_89" ~ "80-89",
+                           age == "case_90" ~ "90+",
+                           age == "total" ~ "Tous âges"))
