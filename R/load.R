@@ -6,6 +6,27 @@ inspq <- inspq %>%
     mutate(Date = lubridate::date(Date),
            rolling_avg = zoo::rollmean(Nb_Nvx_Cas, k = 7, fill = NA, align = "right")) %>%
     filter(Date > ymd("2020-02-24"))
+
+#res <- httr::GET("https://www.inspq.qc.ca/sites/default/files/covid/donnees/covid19-hist.csv?randNum=26969598",
+#                 add_headers("X-Requested-With" = "XMLHttpRequest"))
+#res_parsed <- content(res, "parsed")
+
+#res2 <- httr::GET("https://www.inspq.qc.ca/sites/default/files/covid/donnees/regions.csv?randNum=26969598",
+#                 add_headers("X-Requested-With" = "XMLHttpRequest"))
+#res2_parsed <- content(res2, "parsed")
+
+#res3 <- httr::GET("https://www.inspq.qc.ca/sites/default/files/covid/donnees/manual-data.csv?randNum=26969598",
+#                 add_headers("X-Requested-With" = "XMLHttpRequest"))
+#res3_parsed <- content(res3, "parsed")
+
+#res4 <- httr::GET("https://www.inspq.qc.ca/sites/default/files/covid/donnees/comorbidite.csv?randNum=26969598",
+#                 add_headers("X-Requested-With" = "XMLHttpRequest"))
+#res4_parsed <- content(res4, "parsed")
+
+#res5 <- httr::GET("https://www.inspq.qc.ca/sites/default/files/covid/donnees/tableau-rpa-new.csv?randNum=26969598",
+#                 add_headers("X-Requested-With" = "XMLHttpRequest"))
+#res5_parsed <- content(res5, "parsed")
+
 cases <- read.csv("R/data/Graphique 1.2 - page_principal.csv")
 colnames(cases) <- c("Date", "epi_link", "lab_link", "moving_avg")
 cases <- cases %>% mutate(Date = lubridate::date(Date),
