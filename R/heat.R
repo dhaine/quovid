@@ -3,7 +3,7 @@ assign_week <- function(date, origin) {
     (as.numeric(ymd(date) - ymd(origin)) %/% 7) + 1
 }
 age_sum <- age_l %>%
-    filter(date >= ymd("2020-07-19") & date < ymd("2021-04-04")) %>%
+    filter(date >= ymd("2020-07-26") & date < ymd("2021-04-11")) %>%
     mutate(week = assign_week(date, origin = "2020-07-19")) %>%
     group_by(week, age) %>%
     summarise(nbr_wk = sum(nbr),
