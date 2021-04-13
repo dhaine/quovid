@@ -335,11 +335,10 @@ hospi_i <- hospi_i %>%
            roll_si = zoo::rollmean(si, k = 7, fill = NA, align = "right"))
 ## load data prévalence hospitalisation
 hospi_p <- read.csv("R/data/Graphique 3.1 - page_principal.csv")
-colnames(hospi_p) <- c("date", "hors_si_old", "hors_si_new", "si")
+colnames(hospi_p) <- c("date", "hors_si", "si")
 hospi_p <- hospi_p %>%
     mutate(date = lubridate::date(date),
-           hors_si = rowSums(hospi_p[, c(2, 3)], na.rm = TRUE),
-           hospi = rowSums(hospi_p[, c(2:4)], na.rm = TRUE),
+           hospi = rowSums(hospi_p[, c(2:3)], na.rm = TRUE),
            roll_hospi = zoo::rollmean(hospi, k = 7, fill = NA, align = "right"),
            roll_hsi = zoo::rollmean(hors_si, k = 7, fill = NA, align = "right"),
            roll_si = zoo::rollmean(si, k = 7, fill = NA, align = "right"))
